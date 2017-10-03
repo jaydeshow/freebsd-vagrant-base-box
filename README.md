@@ -86,45 +86,29 @@ Note: You may use this short link instead: `https://goo.gl/6gJtsd`.
 
 10. Halt the VM.
 
+
+"C:\Program Files\Oracle\VirtualBox\VBoxManage" modifyvdi "C:\Users\andrew\VirtualBox VMs\freebsd\freebsd.vdi" compact
+
+
 ### Create the Box File
 
 1. To create the box file just run the following command line.
 
-        vagrant package --base my-virtual-machine
+        vagrant package --base freebsd
 
-2. The file `package.box` can be referenced by `vm.box_url` configuration
+2. The file `package.box` can be referenced by `vm.box` configuration
 parameter within your `Vagrantfile`.
 
 
+add Vagrantfile
+
+		vagrant up
+		vagrant ssh
+
 ### Box File
 
-#### FreeBSD 11.0
+#### FreeBSD 11.1
 
-Download the final box file here: http://vastland.moumantai.de/FreeBSD/vagrant-box/FreeBSD-11.0-vagrant-fe6134d.box
-
-SHA256 Checksum: `fe6134d5cd5c1d5bce705ded1333445236b135c20929c8dde9592e73d0ea001d`
-
-#### FreeBSD 10.3
-
-Download the final box file here: http://vastland.moumantai.de/FreeBSD/vagrant-box/FreeBSD-10.3-vagrant-697852c.box
-
-SHA256 Checksum: `697852c81fb7c2121eaa73fd45cdef841105d8c100e2c5d7ccbe3339ee1e1cb2`
-
-#### FreeBSD 10.2
-
-Download the final box file here: http://vastland.moumantai.de/FreeBSD/vagrant-box/FreeBSD-10.2-vagrant-abe25b9.box
-
-SHA256 Checksum: `abe25b9b2b934053a624632323f7c62c1fe6dce0fd7453fb484cc2aba17f4056`
-
-#### FreeBSD 10.1
-Download the final box file here: http://vastland.moumantai.de/FreeBSD/vagrant-box/FreeBSD-10.1-vagrant-base.box
-
-SHA256 Checksum: `67f6d3e60d26ae811b685f13ddd3683a0cc7280ac8a104203006573ea831e699`
-
-#### FreeBSD 10.0
-Download the final box file here: http://vastland.moumantai.de/FreeBSD/vagrant-box/FreeBSD-10-vagrant-base.box
-
-SHA256 Checksum: `3418526d3a67313d3763ac75eb5b46c2d5d90837342e9d4fdef46dc387128735`
 
 ### Links
 1. mfsBSD: https://www.freebsd.org/doc/en/articles/remote-install/preparation.html
