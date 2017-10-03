@@ -54,7 +54,7 @@ for package in ${PACKAGES}; do
   pkg install -y ${package}
 done
 
-# Create the user
+# Create the user and disable ssh login
 echo "*" | pw useradd -n ${SSH_USER} -s /usr/local/bin/bash -m -G wheel -H 0
 
 # Disable root's password

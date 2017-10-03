@@ -2,7 +2,7 @@
 # vi: set ft=ruby :
 $script = <<SCRIPT
 echo I am provisioning...
-echo 'export http_proxy="http://proxy.cht.com.tw:8080"' >> /etc/profile
+echo 'export http_proxy="http://proxy1.cht.com.tw:8080"' >> /etc/profile
 echo 'export http_proxys="http://proxy.cht.com.tw:8080"' >> /etc/profile
 SCRIPT
 # All Vagrant configuration is done below. The "2" in Vagrant.configure
@@ -18,20 +18,28 @@ Vagrant.configure("2") do |config|
   # boxes at https://atlas.hashicorp.com/search.
   config.vm.box = "package.box"
   #config.vm.box_version = "201708.22.0"
-  config.vm.hostname = "myfreebsd2"
+  config.vm.hostname = "myfreebsd4"
+  config.vm.synced_folder ".", "/vagrant", disabled: true
+  # Use NFS as a shared folder
+  #config.vm.synced_folder ".", "/vagrant", :nfs => true, id: "vagrant-root"
   
+  #config.vm.synced_folder ".", "/vagrant", type: "smb",
+  #  smb_password: "hsiao1", smb_username: "andrew",
+  #  mount_options: ["username=andrew","password=hsiao1"]
+	
+  # config.vm.network "private_network", ip: "192.168.50.4"
   # config.vm.provision "shell", inline: $script
 
-  # puts "proxyconf..."
+  # puts "proxyconf...not use "
   # if Vagrant.has_plugin?("vagrant-proxyconf")
     # puts "find proxyconf plugin !"
     # #if ENV["http_proxy"]
-      # puts "http_proxy: " + "http://proxy.cht.com.tw:8080"
-      # config.proxy.http     = "http://proxy.cht.com.tw:8080"
+      # puts "http_proxy: " + "http://proxy1.cht.com.tw:8080"
+      # config.proxy.http     = "http://proxy1.cht.com.tw:8080"
     # #end
     # #if ENV["https_proxy"]
-      # puts "https_proxy: " + "http://proxy.cht.com.tw:8080"
-      # config.proxy.https    = "http://proxy.cht.com.tw:8080"
+      # puts "https_proxy: " + "http://proxy1.cht.com.tw:8080"
+      # config.proxy.https    = "http://proxy1.cht.com.tw:8080"
     # #end
     # #if ENV["no_proxy"]
       # config.proxy.no_proxy = "localhost,127.0.0.1"
