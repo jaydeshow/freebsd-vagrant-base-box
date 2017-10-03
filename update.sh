@@ -1,14 +1,23 @@
 #!/bin/sh -e
 
-HOSTNAME="${HOSTNAME:-""}"
+HOSTNAME="${HOSTNAME:-"freebsd"}"
 INTERFACE="${EXT_IF:-"vtnet0"}"
 PACKAGES="${PACKAGES:-"ca_root_nss sudo bash python"}"
 PUBLIC_KEY="${PUBLIC_KEY:-"https://raw.github.com/mitchellh/vagrant/master/keys/vagrant.pub"}"
 SSH_USER="${SSH_USER:-"vagrant"}"
 ZPOOL_NAME="${ZPOOL_NAME:-"tank"}"
 
+PROXY_NAME="${PROXY_NAME:-"http://proxy.cht.com.tw:8080"}"
+
 # ZFS filesystems
 zfs create -o mountpoint=/home ${ZPOOL_NAME}/home
+
+# global variables
+echo 'export HTTP_PROXY="'${PROXY_NAME}'"' >> /etc/profile
+echo 'export HTTPS_PROXY="'${PROXY_NAME}'"' >> /etc/profile
+echo 'setenv HTTP_PROXY '${PROXY_NAME}'' >> /etc/csh.cshrc
+echo 'setenv HTTPS_PROXY '${PROXY_NAME}'' >> /etc/csh.cshrc
+
 
 # Network configuration
 echo 'hostname="'${HOSTNAME}'"' >> /etc/rc.conf

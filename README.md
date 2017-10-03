@@ -15,8 +15,26 @@ and add set the adapter type to `virtio-net`. Make sure the size of the
 configured hard disk is at least 8GB (choose a disk size that will suite your
 needs ~120GB).
 
+### Virtualbox Settings 虛擬硬體設定
+
+Create a new Virtual Machine (minimal 1024MB Memory) with the following settings:
+
+- System -> Motherboard -> **Hardware clock in UTC time**
+- System -> Acceleration -> **VT/x/AMD-V**
+- System -> Acceleration -> **Enable Nested Paging**
+- Storage -> Attach a **.vdi** disk (this one we can minimize later)
+- Network -> Adapter 1 -> Attached to -> NAT
+- Network -> Adapter 1 -> Advanced -> Adapter Type -> **Paravirtualized Network (virtio-net)**
+- Network -> Adapter 2 -> Advanced -> Attached to -> **Host-Only Adapter**
+- Network -> Adapter 2 -> Advanced -> Adapter Type -> **Paravirtualized Network (virtio-net)**
+
+I would also recommend to disable all the things you are not using, such as
+*audio* and *usb*.
+
 2. Add the [downloaded mfsBSD ISO](http://mfsbsd.vx.sk/) (any edition) 
 as bootable CD device.
+
+recommend 11.1-RELEASE-amd64 special edition (191MB)
 
 3. Boot.
 
@@ -24,9 +42,26 @@ as bootable CD device.
 
 5. Install FreeBSD.
 
-        zfsinstall -d /dev/ada0
+### Installation from mfsBSD ISO
+
+Attach the ISO as a CD and boot it. You can login with `root` and password
+`mfsroot`. After logging in, start the base installation with:
+
+#ee /etc/ssh/sshd_config
++PermitRootLogin yes
+#service sshd restart
+
+add a ssh port forwarding
+root@mfsbsd:~ # mount_cd9660 /dev/cd0 /media/
+root@mfsbsd:~ # zfsinstall -d /dev/ada0 -u /media/11.1-RELEASE-amd64 -s 4G
 
 8. Stop the VM.
+
+When the installation is done, you can `poweroff` and **remove the CD from
+boot order in the settings.**
+
+root@mfsbsd:~ # poweroff
+
 9. Remove attached ISO
 10. Boot the VM, login with `root` and execute the following commands.
 
