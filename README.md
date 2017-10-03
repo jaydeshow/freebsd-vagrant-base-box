@@ -63,14 +63,26 @@ boot order in the settings.**
 root@mfsbsd:~ # poweroff
 
 9. Remove attached ISO
+
 10. Boot the VM, login with `root` and execute the following commands.
 
+
+
         dhclient vtnet0
+
+PROXY_NAME="${PROXY_NAME:-"http://proxy.cht.com.tw:8080"}"
+# global variables
+echo 'export HTTP_PROXY="'${PROXY_NAME}'"' >> /etc/profile
+echo 'export HTTPS_PROXY="'${PROXY_NAME}'"' >> /etc/profile
+echo 'setenv HTTP_PROXY '${PROXY_NAME}'' >> /etc/csh.cshrc
+echo 'setenv HTTPS_PROXY '${PROXY_NAME}'' >> /etc/csh.cshrc
+		
+		
         fetch -o - --no-verify-peer \
-         https://raw.githubusercontent.com/JoergFiedler/freebsd-vagrant-base-box/master/update.sh \
+         https://raw.githubusercontent.com/jaydeshow/freebsd-vagrant-base-box/master/update.sh \
          | sh | tee out.log
 
-Note: You may use this short link instead: `http://bit.ly/1lEHtrx`.
+Note: You may use this short link instead: `https://goo.gl/6gJtsd`.
 
 10. Halt the VM.
 
